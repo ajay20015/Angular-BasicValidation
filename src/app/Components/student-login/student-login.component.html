@@ -1,0 +1,39 @@
+<!-- {{ studentDetail.valid | json }} -->
+<small class="text-muted">
+  <p>Email : 123@gmail.com <br> Password : 12345
+  </p>
+</small>
+<div class="main">
+  <div class="main-Fields">
+    <div class="main-head">
+      <h2>Student Login</h2>
+    </div>
+
+    <form [formGroup]="studentDetail" class="main-form">
+      <div class="form-group">
+        <label for="email">Email :</label> <br />
+        <input formControlName="email" id="email" class="form-control" placeholder="Enter Email" autocomplete="off" />
+        <div *ngIf="email?.touched && email?.invalid">
+          <small *ngIf="email?.errors?.['required']" class="text-danger">*Email is Required</small>
+          <small *ngIf="email?.errors?.['pattern']" class="text-danger">*Please enter Valid Email Address!</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password :</label> <br />
+        <input formControlName="password" id="password" class="form-control" placeholder="Enter Password"
+          autocomplete="off" />
+        <div *ngIf="password?.touched && password?.invalid">
+          <small *ngIf="password?.errors?.['required']" class="text-danger">*Password is Required</small>
+          <small *ngIf="password?.errors?.['pattern']" class="text-danger">*Please enter Valid Password!</small>
+        </div>
+      </div>
+
+      <div class="main-btn">
+        <button [disabled]="studentDetail.invalid" (click)="login(studentDetail)" class="btn btn-primary" type="button">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
