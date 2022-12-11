@@ -1,0 +1,144 @@
+<!-- Name, Last name , Phone number , Pancard number, Adhar card number, Country, state,  District, City, Pincode -->
+<!-- {{ studentRegValue.invalid | json }} -->
+
+<div class="main" @Registration>
+    <div class="main-Fields">
+        <div class="main-head">
+            <h3>Student Registration</h3>
+        </div>
+        <form [formGroup]="studentRegValue">
+            <div class="form-group">
+                <label for="firstName">First Name :</label>
+                <input id="firstName" autocomplete="off" formControlName="firstName" type="text" placeholder="FirstName"
+                    class="form-control" />
+                <div *ngIf="firstName?.touched && firstName?.invalid">
+                    <small *ngIf="firstName?.errors?.['required']" class="text-danger">*FirstName is Required!</small>
+                    <small *ngIf="firstName?.errors?.['pattern']" class="text-danger">*Enter Valide Name!</small>
+                </div>
+            </div>
+            <div>
+                <h1></h1>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name :</label>
+                <input id="lastName" formControlName="lastName" type="text" placeholder="LastName"
+                    class="form-control" />
+                <div *ngIf="lastName?.touched && lastName?.invalid">
+                    <small *ngIf="lastName?.errors?.['required']" class="text-danger">*LastName is Required!</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Phone Number :</label>
+                <input id="phoneNumber" formControlName="phoneNumber" type="number" placeholder="Phone Number"
+                    class="form-control" />
+                <div *ngIf="phoneNumber?.touched && phoneNumber?.invalid">
+                    <small *ngIf="phoneNumber?.errors?.['required']" class="text-danger">*Phone Number is
+                        Required!</small>
+                    <small *ngIf="phoneNumber?.errors?.['pattern']" class="text-danger">*Enter Valid Phone
+                        Number!</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="pancardNumber">PanCard Number :</label>
+                <input id="pancardNumber" formControlName="pancardNumber" type="text" placeholder="Pancard Number"
+                    class="form-control" />
+                <div *ngIf="pancardNumber?.touched && pancardNumber?.invalid">
+                    <small *ngIf="pancardNumber?.errors?.['required']" class="text-danger">*Pancard Number is
+                        Required!</small>
+                    <small *ngIf="pancardNumber?.errors?.['pattern']" class="text-danger">*Enter Valid Pancard
+                        Number!</small>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="aadharcardNumber">AddharCard Number :</label>
+                <input id="aadharcardNumber" formControlName="aadharcardNumber" type="number"
+                    placeholder="Addharcard Number" class="form-control" />
+                <div *ngIf="aadharcardNumber?.touched && aadharcardNumber?.invalid">
+                    <small *ngIf="aadharcardNumber?.errors?.['required']" class="text-danger">*Aadharcard Number is
+                        Required!</small>
+                    <small *ngIf="aadharcardNumber?.errors?.['pattern']" class="text-danger">*Enter Valid Aadharcard
+                        Number!</small>
+                </div>
+            </div>
+            <div formGroupName="address">
+                <div style="display: flex">
+                    <div class="form-group me-2">
+                        <label for="city"> City :</label>
+                        <input id="city" formControlName="city" type="text" placeholder="City" class="form-control" />
+                        <div *ngIf="city?.touched && city?.invalid">
+                            <small *ngIf="city?.errors?.['required']" class="text-danger">*City is Required!</small>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="district">District :</label>
+                        <input id="district" formControlName="district" type="text" placeholder="District"
+                            class="form-control" />
+                        <div *ngIf="district?.touched && district?.invalid">
+                            <small *ngIf="district?.errors?.['required']" class="text-danger">*District is
+                                Required!</small>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex;">
+                    <div>
+                        <label for="country">Country :</label>
+                        <select class="form-control" formControlName="country" id="country" #selectCountry>
+                            <option value="">--Select Your Country--</option>
+                            <option *ngFor="let countries of Country; index as i">
+                                {{ countries.country }}
+                            </option>
+                        </select>
+                        <div *ngIf="country?.touched && country?.invalid">
+                            <small *ngIf="country?.errors?.['required']" class="text-danger">*Country is
+                                Required!</small>
+                        </div>
+                    </div>
+                    <!-- <div>
+                        <label for="state">State :</label><br>
+                        <select class="form-control" formControlName="state" id="state">
+                            <option value="">--Select Your State--</option>
+                            <option *ngFor="let state of states; index as i">
+                                {{ state.name }}
+                            </option>
+                        </select>
+                        <div *ngIf="state?.touched && state?.invalid">
+                            <small *ngIf="state?.errors?.['required']" class="text-danger">*State is
+                                Required!</small>
+                        </div>
+                    </div> -->
+                    <div *ngIf="country?.valid">
+                        <label for="state">State :</label><br>
+                        <select class="form-control" formControlName="state" id="state">
+                            <option value="">--Select Your State--</option>
+                            <ng-container *ngFor="let statecountrys of StateCountry; index as i">
+                                <option *ngIf="selectCountry.value == statecountrys.country_name;">
+                                    {{ statecountrys.name}}
+                                </option>
+                            </ng-container>
+                            <option value="">{{selectCountry.value}} Country States records not found...</option>
+                        </select>
+                        <div *ngIf="state?.touched && state?.invalid">
+                            <small *ngIf="state?.errors?.['required']" class="text-danger">*State is
+                                Required!</small>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="form-group">
+                    <label for="pincode">PinCode :</label>
+                    <input id="pincode" formControlName="pincode" type="text" placeholder="Pincode"
+                        class="form-control" />
+                    <div *ngIf="pincode?.touched && pincode?.invalid">
+                        <small *ngIf="pincode?.errors?.['required']" class="text-danger">*Pincode is Required!</small>
+                    </div>
+                </div>
+            </div>
+            <div class="main-btn mt-1">
+                <button [class]="studentRegValue.invalid ? 'btn-danger' : 'btn-primary'"
+                    [disabled]="studentRegValue.invalid" (click)="submit(studentRegValue)" class="btn btn-primary">
+                    Submit
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

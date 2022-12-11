@@ -1,0 +1,54 @@
+<!-- {{ studentDetail.valid | json }} -->
+<small class="text-muted">
+  <p>Email : 123@gmail.com <br> Password : 12345
+  </p>
+</small>
+<div class="main" @Login>
+  <div class="main-Fields">
+    <div class="main-head">
+      <h1></h1>
+      <h2>Student Login</h2>
+      <h4>
+        <span (click)="toggle()" style="cursor: pointer;">
+          <i class="fa-solid fa-circle-exclamation"></i>
+        </span>
+      </h4>
+    </div>
+    <form [formGroup]="studentDetail" class="main-form">
+      <div class="form-group">
+        <label for="email">Email :</label> <br />
+        <input formControlName="email" id="email" type="email" class="form-control" placeholder="Enter Email"
+          autocomplete="off" />
+        <div *ngIf="email?.touched && email?.invalid">
+          <small *ngIf="email?.errors?.['required']" class="text-danger">*Email is Required</small>
+          <small *ngIf="email?.errors?.['pattern']" class="text-danger">*Please enter Valid Email Address!</small>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password :</label> <br />
+        <input formControlName="password" type="password" id="password" class="form-control"
+          placeholder="Enter Password" autocomplete="off" />
+        <div *ngIf="password?.touched && password?.invalid">
+          <small *ngIf="password?.errors?.['required']" class="text-danger">*Password is Required</small>
+          <small *ngIf="password?.errors?.['pattern']" class="text-danger">*Please enter Valid Password!</small>
+        </div>
+      </div>
+
+      <div class="main-btn">
+        <button [class]="studentDetail.invalid ? 'btn-danger' : 'btn-primary'" title="button disabled"
+          [disabled]="studentDetail.invalid" (click)="login(studentDetail)" class="btn btn-primary" type="button">
+          Login
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+<div [@Toggle]="toggleShow ? 'Toggle1' : ''" class="main-para" *ngIf="toggleShow">
+  <p class="para">
+    The student portal is a term commonly used to describe a login page where students can provide a Email and
+    password to access the institution's programs and educational materials. is different. Sometimes the student portal
+    also refers to an entire section of the 'LMS' learning management system.
+  </p>
+</div>
+<!-- <button mat-stroked-button color="red">click</button> -->

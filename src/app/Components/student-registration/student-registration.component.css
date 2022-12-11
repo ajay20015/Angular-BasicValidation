@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.main {
+  display: flex;
+  margin-top: 1vh;
+  justify-content: center;
+}
+.main-Fields {
+  border: 2px solid rgb(209, 234, 234);
+  border-radius: 25px;
+  padding: 20px;
+  background-color: rgb(209, 234, 234);
+  width: 40%;
+}
+.main-head {
+  display: flex;
+  justify-content: center;
+  font-family: "Times New Roman", Times, serif;
+}
+.main-btn {
+  display: flex;
+  justify-content: center;
+}
